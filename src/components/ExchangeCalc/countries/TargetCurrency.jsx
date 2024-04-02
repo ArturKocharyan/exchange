@@ -22,7 +22,7 @@ function TargetCurrency(counties) {
                                 <div className={style.counties_list}
                                 key={country.name}
                                 onClick={() => {
-                                    dispatch(setTargetCurrency(country.currency))
+                                    dispatch(setTargetCurrency(country))
                                     setVisible(false);
                                 }}
 
