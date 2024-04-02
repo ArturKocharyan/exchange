@@ -3,23 +3,24 @@
     width: 100%;
     height: 80px;
     justify-content: center;
+    color: white;
 }
 
 .nav_container {
     display: flex;
+    justify-content: center;
     width: 100%;
     max-width: 1215px;
-    background-color: rgb(123, 155, 155);
+    background-image: url('../../asets/img/back.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .logo_span {
-    display: inline-block;
-
+    display: flex;
+    font-family: cursive;
 }
 
-.logo_span img {
-    width: 100%;
-    height: 80px;
-    object-fit: contain;
-    background-color:rgb(123, 155, 155) ;
+.logo {
+    font-size: 65px;
 }

@@ -1,13 +1,14 @@
 import React from 'react'
 import style from "./style.module.css"
-import Logo from "../../asets/img/Logo.svg"
+import { IoSwapHorizontalSharp } from "react-icons/io5";
 
 function NavBar() {
     return (
         <nav className={style.main_container} >
             <div className={style.nav_container} >
                 <span className={style.logo_span} >
-                    <img src={Logo} alt='Logo' />
+                    <span className={style.logo} ><IoSwapHorizontalSharp /></span>
+                    <span><h1>EXCHANGE</h1></span>
                 </span>
             </div>
         </nav>
