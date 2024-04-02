@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    baseCurrency:"USD",
-    targetCurrency: "AMD"
+    baseCurrency:{ name: "USA", currency: "USD", flag: "http://flags.fmcdn.net/data/flags/mini/us.png" },
+    targetCurrency: { name: "Armenia", currency: "AMD", flag: "http://flags.fmcdn.net/data/flags/mini/am.png" }
 };
 
 const currencySlise = createSlice({
@@ -14,10 +14,15 @@ const currencySlise = createSlice({
     },
     setTargetCurrency: (state, action) => {
         state.targetCurrency = action.payload
+    },
+    setChangeCurrency: (state) => {
+        const tempCurrency = state.baseCurrency;
+        state.baseCurrency = state.targetCurrency;
+        state.targetCurrency = tempCurrency;
     }
   },
 });
 
-export const { setBaseCurrency,setTargetCurrency } = currencySlise.actions;
+export const { setBaseCurrency,setTargetCurrency, setChangeCurrency } = currencySlise.actions;
 
 export default currencySlise.reducer;

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Button, Popover } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTargetCurrency } from '../../../redux/slices/currencySlice';
 import style from './style.module.css'
 
 function TargetCurrency(counties) {
 
     const dispatch = useDispatch()
-    const [ selectedCountry, setSelectedCountry ] = useState(counties.counties[7])
+    const targetCurrency = useSelector((state) => state.currency.targetCurrency)
+    const [visible, setVisible] = useState(false);
 
     return (
         <div>
@@ -21,8 +22,10 @@ function TargetCurrency(counties) {
                                 <div className={style.counties_list}
                                 key={country.name}
                                 onClick={() => {
-                                    setSelectedCountry(country)
-                                    dispatch(setTargetCurrency(country.currency))}}
+                                    dispatch(setTargetCurrency(country.currency))
+                                    setVisible(false);
+                                }}
+
                                 >
                                     <span>{country.name}</span>
                                     <span><img className={style.img_style} src={country.flag} alt={country.name} /></span>
@@ -34,11 +37,13 @@ function TargetCurrency(counties) {
                     </div>
                 }
                 trigger="click"
+                open={visible}
+                onClick = {() => setVisible(true)}
             >
                 <span className={style.header_text} >Select Target Currency</span>
                 <Button className={style.select_country} >
-                    <span>{selectedCountry.name}</span>
-                    <span><img className={style.img_style} src={selectedCountry.flag} alt={selectedCountry.name}/></span>
+                    <span>{targetCurrency.name}</span>
+                    <span><img className={style.img_style} src={targetCurrency.flag} alt={targetCurrency.name}/></span>
                 </Button>
             </Popover>
         </div>

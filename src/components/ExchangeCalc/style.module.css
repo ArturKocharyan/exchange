@@ -45,6 +45,40 @@
     justify-content: center;
 }
 
+.input_container {
+    display: flex;
+}
+
+.input_container span {
+    display: flex;
+    height: 100%;
+    padding-top: 5px;
+    margin-left: 5px;
+}
+
+.tooltip {
+    background-color: red;
+}
+
+.mid_container {
+    display: flex;
+    width: 40px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mid_container span {
+    display: flex;
+    width: 36px;
+    height: 16px;
+    align-content: center;
+    justify-content: center;
+    color: rgb(36, 77, 165);
+    font-size: 30px;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 876px) {
     .exchange_container {
         flex-direction: column;
