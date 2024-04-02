@@ -30,7 +30,6 @@ function Exchange() {
     };
 
     const calculateExchange = () => {
-        if (amount / 2 === isNaN) return 'Loading...';
         const result = amount * exchangeRate;
         return <div className={style.resoult} >{result.toFixed(1)} {targetCurrency}</div>;
     };

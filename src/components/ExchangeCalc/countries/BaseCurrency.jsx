@@ -15,9 +15,6 @@ function BaseCurrency(counties) {
         setVisible(visibility);
     };
 
-    const handleSearch = (e) => {
-        setSearchQuery(e.target.value);
-    };
 
     const filteredCountries = counties.counties.filter((country) =>
         country.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -30,7 +27,7 @@ function BaseCurrency(counties) {
                 title="Countries and Currencies"
                 content={
                     <div className={style.select_container} >
-                        <Input placeholder="Search by country name" onChange={handleSearch} />
+                        <Input placeholder="Search by country name" onChange={(e) => setSearchQuery(e.target.value)} />
                         {filteredCountries.map((country) => {
                             return (
                                 <div className={style.counties_list}

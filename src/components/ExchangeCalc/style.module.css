@@ -10,7 +10,7 @@
     display: flex;
     width: 40%;
     height: 200px;
-    border: 1px solid rgb(36, 77, 165);
+    border: 1px solid #4096ff;
     border-radius: 15px;
     justify-content: space-between;
 }
@@ -76,7 +76,7 @@
     height: 16px;
     align-content: center;
     justify-content: center;
-    color: rgb(36, 77, 165);
+    color: #4096ff;
     font-size: 30px;
     cursor: pointer;
 }

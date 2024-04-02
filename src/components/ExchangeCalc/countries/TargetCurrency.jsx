@@ -15,10 +15,6 @@ function TargetCurrency(counties) {
         setVisible(visibility);
     };
 
-    const handleSearch = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
     const filteredCountries = counties.counties.filter((country) =>
         country.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -30,7 +26,7 @@ function TargetCurrency(counties) {
                 title="Countries and Currencies"
                 content={
                     <div className={style.select_container} >
-                        <Input placeholder="Search by country name" onChange={handleSearch} />
+                        <Input placeholder="Search by country name" onChange={(e) => setSearchQuery(e.target.value)} />
                         {filteredCountries.map((country) => {
                             return (
                                 <div className={style.counties_list}
@@ -39,12 +35,10 @@ function TargetCurrency(counties) {
                                     dispatch(setTargetCurrency(country))
                                     setVisible(false);
                                 }}
-
                                 >
                                     <span>{country.name}</span>
                                     <span><img className={style.img_style} src={country.flag} alt={country.name} /></span>
                                 </div>
-                                
                             )
                         }
                         )}
