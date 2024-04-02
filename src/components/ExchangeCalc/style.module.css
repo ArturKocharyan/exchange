@@ -87,4 +87,23 @@
         height: 400px;
         width: 90%;
     }
+
+    .select_container {
+        width: 92%;
+    }
+
+    .resoult_container {
+        width: 92%;
+    }
+
+    .mid_container {
+        width: 100%;
+        height: 40px;
+        flex-direction: row;
+        margin-top: 5px
+    }
+
+    .mid_container span {
+        transform: rotate(90deg);
+    }
 }

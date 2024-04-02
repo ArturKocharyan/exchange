@@ -9,7 +9,8 @@
     flex-direction: column;
     max-height: 230px;
     overflow-x: auto;
-    width: 300px;
+    max-width: 300px;
+    width: 100%;
 }
 
 .select_container::-webkit-scrollbar {
@@ -28,7 +29,7 @@
 .img_style {
     width: 38px;
     height: 20px;
-    border: 0.5px solid rgb(119, 119, 119);
+    border: 0.5px solid black;
 }
 
 .header_text {
