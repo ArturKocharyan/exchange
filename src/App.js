@@ -3,6 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Exchange from './components/ExchangeCalc/Exchange';
 import Charts from './components/Charts/Charts';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <NavBar />
       <Exchange />
       <Charts />
+      <Footer />
     </div>
   );
 }
