@@ -22,6 +22,9 @@ function Exchange() {
         const newValue = e.target.value;
         if (isNaN(newValue)) {
             setTooltipVisible(true);
+            setTimeout(() => {
+                setTooltipVisible(false);
+            }, 1000);
         } else {
             setAmount(newValue);
             setTooltipVisible(false);
