@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import style from './style.module.css';
-import countryCurrencies from '../../asets/currency/currency'; // Importing the countryCurrencies array
+import countryCurrencies from '../../asets/currency/currency';
 import { Button } from 'antd';
 
 const Charts = () => {
@@ -13,14 +13,12 @@ const Charts = () => {
             try {
                 const response = await fetch('https://open.er-api.com/v6/latest');
                 const data = await response.json();
-
-                // Filter currency data for only the specified countries
                 const filteredData = {};
                 countryCurrencies.forEach(country => {
                     filteredData[country.currency] = data.rates[country.currency];
                 });
 
-                const labels = countryCurrencies.map(country => country.name);
+                const labels = countryCurrencies.map(country => country.currency);
                 const values = countryCurrencies.map(country => filteredData[country.currency]);
 
                 setChartData({
@@ -28,15 +26,14 @@ const Charts = () => {
                     datasets: [{
                         label: 'Currency Value',
                         data: values,
-                        borderColor: 'blue',
-                        fill: false
+                        borderColor: '#4096ff',
+                        fill: true
                     }]
                 });
             } catch (error) {
                 console.error('Error fetching data: ', error);
             }
         };
-
         fetchData();
     }, []);
 
@@ -66,10 +63,10 @@ const Charts = () => {
 
     return (
         <div className={style.main_container} >
-            <div>
-                <div  >
-                    <canvas id="currencyChart" width="400" height="100"></canvas>
-                </div>
+            <div className={style.chart_container} >
+                <span className={style.chart_span} >
+                    <canvas id="currencyChart" className={style.chart}></canvas>
+                </span>
                 <div className={style.button_container} >
                     <Button onClick={() => handleTabChange('line')} className={chartType === 'line' ? style.active_tab : style.tab}>Line Chart</Button>
                     <Button onClick={() => handleTabChange('bar')} className={chartType === 'bar' ? style.active_tab : style.tab}>Bar Chart</Button>
