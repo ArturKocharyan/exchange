@@ -1,26 +1,26 @@
 import React, { useState } from 'react'
 import style from "./style.module.css"
 import { Input, Tooltip } from 'antd'
-import BaseCurrency from './countries/BaseCurrency'
-import countryCurrencies from "../../asets/currency/currency"
+import Currency from './countries/Currency'
 import { useSelector, useDispatch } from 'react-redux'
-import TargetCurrency from './countries/TargetCurrency'
 import useExchangeRate from '../../hooks/useExchangeRate'
 import { IoSwapHorizontalOutline } from "react-icons/io5";
 import { setChangeCurrency } from '../../redux/slices/currencySlice'
+import { setBaseCurrency } from '../../redux/slices/currencySlice'
+import { setTargetCurrency } from '../../redux/slices/currencySlice'
 
 function Exchange() {
 
     const [amount, setAmount] = useState(1);
-    const baseCurrency = useSelector((state) => state.currency.baseCurrency.currency)
-    const targetCurrency = useSelector((state) => state.currency.targetCurrency.currency)
-    const exchangeRate = useExchangeRate( baseCurrency, targetCurrency);
+    const passBaseCurrency = useSelector((state) => state.currency.baseCurrency)
+    const passTargetCurrency = useSelector((state) => state.currency.targetCurrency)
+    const exchangeRate = useExchangeRate(passBaseCurrency.currency, passTargetCurrency.currency);
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const dispatch = useDispatch()
 
     const handleChange = (e) => {
         const newValue = e.target.value;
-        if (isNaN(newValue)) {
+        if (isNaN(newValue) || newValue === " " || newValue === "00") {
             setTooltipVisible(true);
             setTimeout(() => {
                 setTooltipVisible(false);
@@ -33,14 +33,16 @@ function Exchange() {
 
     const calculateExchange = () => {
         const result = amount * exchangeRate;
-        return <div className={style.resoult} >{result.toFixed(1)} {targetCurrency}</div>;
+        return <div className={style.resoult} >{result.toFixed(1)} {passTargetCurrency.currency}</div>;
     };
 
     return (
         <div className={style.main_container} >
             <div className={style.exchange_container} >
                 <div className={style.select_container} >
-                    <BaseCurrency counties={countryCurrencies} />
+                    <Currency
+                        counties={passBaseCurrency}
+                        handleCurrencyChange={(country) => dispatch(setBaseCurrency(country))} />
                     <div className={style.input_container} >
                         <Tooltip
                             open={tooltipVisible}
@@ -53,9 +55,9 @@ function Exchange() {
                                 value={amount}
                                 onChange={handleChange}
                                 placeholder="Enter amount"
+                                suffix={passBaseCurrency.currency}
                             />
                         </Tooltip>
-                        <span>{baseCurrency}</span>
                     </div>
                 </div>
                 <div className={style.mid_container} >
@@ -64,7 +66,9 @@ function Exchange() {
                     }} ><IoSwapHorizontalOutline /></span>
                 </div>
                 <div className={style.resoult_container} >
-                    <TargetCurrency counties={countryCurrencies} />
+                    <Currency
+                        counties={passTargetCurrency}
+                        handleCurrencyChange={(country) => dispatch(setTargetCurrency(country))} />
                     <div>{calculateExchange()}</div>
                 </div>
                 <div className={style.result_container} ></div>

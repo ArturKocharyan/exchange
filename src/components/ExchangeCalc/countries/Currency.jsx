@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Popover, Input, Tooltip } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { setTargetCurrency } from '../../../redux/slices/currencySlice';
+import countryCurrencies from '../../../asets/currency/currency';
 import style from './style.module.css'
 
-function TargetCurrency(counties) {
+function Currency({counties, handleCurrencyChange}) {
 
-    const dispatch = useDispatch()
-    const targetCurrency = useSelector((state) => state.currency.targetCurrency)
     const [visible, setVisible] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [tooltipVisible, setTooltipVisible] = useState(false)
@@ -28,18 +25,18 @@ function TargetCurrency(counties) {
         setVisible(visibility);
     };
 
-    const filteredCountries = counties.counties.filter((country) =>
+    const filteredCountries = countryCurrencies.filter((country) =>
         country.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
         <div>
-            <Popover 
+            <Popover
                 className={style.popver}
                 title="Countries and Currencies"
                 content={
                     <div className={style.select_container} >
-                       <Tooltip
+                        <Tooltip
                             open={tooltipVisible}
                             title="!!! Please enter a valid country."
                             placement="bottom"
@@ -53,15 +50,16 @@ function TargetCurrency(counties) {
                         {filteredCountries.map((country) => {
                             return (
                                 <div className={style.counties_list}
-                                key={country.name}
-                                onClick={() => {
-                                    dispatch(setTargetCurrency(country))
-                                    setVisible(false);
-                                }}
+                                    key={country.name}
+                                    onClick={() => {
+                                        handleCurrencyChange(country)
+                                        setVisible(false);
+                                    }}
                                 >
                                     <span>{country.name}</span>
                                     <span><img className={style.img_style} src={country.flag} alt={country.name} /></span>
                                 </div>
+
                             )
                         }
                         )}
@@ -70,16 +68,16 @@ function TargetCurrency(counties) {
                 trigger="click"
                 open={visible}
                 onVisibleChange={handleVisibleChange}
-                onClick = {() => setVisible(true)}
+                onClick={() => setVisible(true)}
             >
-                <span className={style.header_text} >Select Target Currency</span>
+                <span className={style.header_text} >Select Base Currency</span>
                 <Button className={style.select_country} >
-                    <span>{targetCurrency.name}</span>
-                    <span><img className={style.img_style} src={targetCurrency.flag} alt={targetCurrency.name}/></span>
+                    <span>{counties.name}</span>
+                    <span><img className={style.img_style} src={counties.flag} alt={counties.name} /></span>
                 </Button>
             </Popover>
         </div>
     )
 }
 
-export default TargetCurrency
+export default Currency

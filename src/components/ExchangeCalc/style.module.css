@@ -50,6 +50,7 @@
 
 .input_container {
     display: flex;
+    height: 31px;
 }
 
 .input_container span {
