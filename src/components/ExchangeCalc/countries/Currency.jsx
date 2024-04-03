@@ -1,25 +1,44 @@
 import React, { useState } from 'react'
-import { Button, Popover, Input, Tooltip } from 'antd';
+import { Button, Popover, Input, Tooltip, message } from 'antd';
 import countryCurrencies from '../../../asets/currency/currency';
 import style from './style.module.css'
+import { useSelector } from 'react-redux';
 
-function Currency({counties, handleCurrencyChange}) {
+function Currency({ counties, handleCurrencyChange }) {
 
     const [visible, setVisible] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const [tooltipVisible, setTooltipVisible] = useState(false)
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [messageApi, contextHolder] = message.useMessage();
+    const passBaseCurrency = useSelector((state) => state.currency.baseCurrency)
+
+    const error = () => {
+        messageApi.open({
+            type: 'error',
+            content: 'You have already selected this country',
+        });
+    };
 
     const handleSearchQueryChange = (value) => {
         setSearchQuery(value);
-       if (isNaN(Number(value))){
-        setTooltipVisible(false)
-       }else{
-        setTooltipVisible(true)
-        setTimeout(() => {
-            setTooltipVisible(false);
-        }, 1000);
-       }
+        if (isNaN(Number(value))) {
+            setTooltipVisible(false)
+        } else {
+            setTooltipVisible(true)
+            setTimeout(() => {
+                setTooltipVisible(false);
+            }, 1000);
+        }
     };
+
+    const sameCurrency = (country) => {
+        if (passBaseCurrency.name === country.name) {
+            error()
+        } else {
+            handleCurrencyChange(country)
+            setVisible(false);
+        }
+    }
 
     const handleVisibleChange = (visibility) => {
         setVisible(visibility);
@@ -31,11 +50,13 @@ function Currency({counties, handleCurrencyChange}) {
 
     return (
         <div>
+            {contextHolder}
             <Popover
                 className={style.popver}
                 title="Countries and Currencies"
                 content={
                     <div className={style.select_container} >
+
                         <Tooltip
                             open={tooltipVisible}
                             title="!!! Please enter a valid country."
@@ -52,8 +73,7 @@ function Currency({counties, handleCurrencyChange}) {
                                 <div className={style.counties_list}
                                     key={country.name}
                                     onClick={() => {
-                                        handleCurrencyChange(country)
-                                        setVisible(false);
+                                        sameCurrency(country)
                                     }}
                                 >
                                     <span>{country.name}</span>
