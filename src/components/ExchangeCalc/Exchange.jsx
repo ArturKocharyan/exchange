@@ -11,11 +11,10 @@ import { setChangeCurrency } from '../../redux/slices/currencySlice'
 
 function Exchange() {
 
-    const API_KEY = '2d8471f2637863411ff1cdff';
     const [amount, setAmount] = useState(1);
     const baseCurrency = useSelector((state) => state.currency.baseCurrency.currency)
     const targetCurrency = useSelector((state) => state.currency.targetCurrency.currency)
-    const exchangeRate = useExchangeRate(API_KEY, baseCurrency, targetCurrency);
+    const exchangeRate = useExchangeRate( baseCurrency, targetCurrency);
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const dispatch = useDispatch()
 

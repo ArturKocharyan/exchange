@@ -15,7 +15,6 @@ function BaseCurrency(counties) {
         setVisible(visibility);
     };
 
-
     const filteredCountries = counties.counties.filter((country) =>
         country.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
