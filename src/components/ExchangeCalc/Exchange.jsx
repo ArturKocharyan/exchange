@@ -37,16 +37,15 @@ function Exchange() {
         setChangeResult(amount)
     }
 
-    const store = () => {
-        setContract({
-            baseName: passBaseCurrency.name,
-            targetName: passTargetCurrency.name,
-            count: changeResult,
-            resoult: changeResult * exchangeRate
-        })
-    }
+    // const store = () => {
+    //     setContract({
+    //         baseName: passBaseCurrency.name,
+    //         targetName: passTargetCurrency.name,
+    //         count: changeResult,
+    //         resoult: changeResult * exchangeRate
+    //     })
+    // }
 
-    console.log(contract, "contract")
 
     const calculateExchange = () => {
         const result = changeResult * exchangeRate;
@@ -90,9 +89,7 @@ function Exchange() {
                         <div>{calculateExchange()}</div>
                     </div>
                 </div>
-                <div className={style.btn_container} onClick={() => {
-                    store()
-                    getResult()}} > <Button>ExChange</Button></div>
+                <div className={style.btn_container} onClick={() => {getResult()}} > <Button>ExChange</Button></div>
             </div>
         </div>
     )
