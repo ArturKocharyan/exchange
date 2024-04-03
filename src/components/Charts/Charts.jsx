@@ -18,7 +18,7 @@ const Charts = () => {
                     filteredData[country.currency] = data.rates[country.currency];
                 });
 
-                const labels = countryCurrencies.map(country => country.currency);
+                const labels = countryCurrencies.map(country => country.name);
                 const values = countryCurrencies.map(country => filteredData[country.currency]);
 
                 setChartData({

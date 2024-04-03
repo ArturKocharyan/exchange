@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Popover, Input } from 'antd';
+import { Button, Popover, Input, Tooltip } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBaseCurrency } from '../../../redux/slices/currencySlice';
 import style from './style.module.css'
@@ -10,6 +10,19 @@ function BaseCurrency(counties) {
     const baseCurrency = useSelector((state) => state.currency.baseCurrency)
     const [visible, setVisible] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [tooltipVisible, setTooltipVisible] = useState(false)
+
+    const handleSearchQueryChange = (value) => {
+        setSearchQuery(value);
+       if (isNaN(Number(value))){
+        setTooltipVisible(false)
+       }else{
+        setTooltipVisible(true)
+        setTimeout(() => {
+            setTooltipVisible(false);
+        }, 1000);
+       }
+    };
 
     const handleVisibleChange = (visibility) => {
         setVisible(visibility);
@@ -26,7 +39,17 @@ function BaseCurrency(counties) {
                 title="Countries and Currencies"
                 content={
                     <div className={style.select_container} >
-                        <Input placeholder="Search by country name" onChange={(e) => setSearchQuery(e.target.value)} />
+                        <Tooltip
+                            open={tooltipVisible}
+                            title="!!! Please enter a valid country."
+                            placement="bottom"
+                            color="red"
+                        >
+                            <Input
+                                placeholder="Search by country name"
+                                onChange={(e) => handleSearchQueryChange(e.target.value)}
+                            />
+                        </Tooltip>
                         {filteredCountries.map((country) => {
                             return (
                                 <div className={style.counties_list}
