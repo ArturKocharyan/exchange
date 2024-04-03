@@ -27,7 +27,8 @@ const Charts = () => {
                         label: 'Currency Value',
                         data: values,
                         borderColor: '#4096ff',
-                        fill: true
+                        fill: false,
+                        backgroundColor: '#4096ff'
                     }]
                 });
             } catch (error) {
