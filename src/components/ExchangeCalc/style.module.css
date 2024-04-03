@@ -13,7 +13,8 @@
     border: 1px solid #4096ff;
     border-radius: 15px;
     justify-content: space-between;
-    background: rgba(25.1, 58.8, 100, .1)
+    background: rgba(25.1, 58.8, 100, .1);
+    flex-direction: column;
 }
 
 .select_container {
@@ -38,6 +39,13 @@
     margin-top: 5%;
 }
 
+.btn_container {
+    display: flex;
+    padding-bottom: 5px;
+    width: 100%;
+    justify-content: center;
+}
+
 .resoult {
     display: flex;
     height: 29px;
@@ -57,7 +65,6 @@
     display: flex;
     height: 100%;
     padding-top: 5px;
-    margin-left: 5px;
 }
 
 .tooltip {
@@ -81,6 +88,12 @@
     color: #4096ff;
     font-size: 30px;
     cursor: pointer;
+    margin-top: 50px;
+}
+
+.inputs_places {
+    display: flex;
+    width: 100%;
 }
 
 @media screen and (max-width: 876px) {
@@ -105,7 +118,12 @@
         margin-top: 5px
     }
 
+    .inputs_places{
+        flex-direction: column;
+    }
+
     .mid_container span {
+        margin-top: 20px;
         transform: rotate(90deg);
     }
 }

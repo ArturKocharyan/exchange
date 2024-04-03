@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import style from "./style.module.css"
-import { Input, Tooltip } from 'antd'
+import { Button, Input, Tooltip } from 'antd'
 import Currency from './countries/Currency'
 import { useSelector, useDispatch } from 'react-redux'
 import useExchangeRate from '../../hooks/useExchangeRate'
@@ -16,6 +16,8 @@ function Exchange() {
     const passTargetCurrency = useSelector((state) => state.currency.targetCurrency)
     const exchangeRate = useExchangeRate(passBaseCurrency.currency, passTargetCurrency.currency);
     const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [changeResult, setChangeResult] = useState(0)
+    const [contract, setContract] = useState({})
     const dispatch = useDispatch()
 
     const handleChange = (e) => {
@@ -31,47 +33,66 @@ function Exchange() {
         }
     };
 
+    const getResult = () => {
+        setChangeResult(amount)
+    }
+
+    const store = () => {
+        setContract({
+            baseName: passBaseCurrency.name,
+            targetName: passTargetCurrency.name,
+            count: changeResult,
+            resoult: changeResult * exchangeRate
+        })
+    }
+
+    console.log(contract, "contract")
+
     const calculateExchange = () => {
-        const result = amount * exchangeRate;
+        const result = changeResult * exchangeRate;
         return <div className={style.resoult} >{result.toFixed(1)} {passTargetCurrency.currency}</div>;
     };
 
     return (
         <div className={style.main_container} >
-            <div className={style.exchange_container} >
-                <div className={style.select_container} >
-                    <Currency
-                        counties={passBaseCurrency}
-                        handleCurrencyChange={(country) => dispatch(setBaseCurrency(country))} />
-                    <div className={style.input_container} >
-                        <Tooltip
-                            open={tooltipVisible}
-                            title="!!! Please enter a valid number."
-                            placement="bottom"
-                            color='red'
-                        >
-                            <Input
-                                type="text"
-                                value={amount}
-                                onChange={handleChange}
-                                placeholder="Enter amount"
-                                suffix={passBaseCurrency.currency}
-                            />
-                        </Tooltip>
+            <div  className={style.exchange_container}>
+                <div className={style.inputs_places}>
+                    <div className={style.select_container} >
+                        <Currency
+                            counties={passBaseCurrency}
+                            handleCurrencyChange={(country) => dispatch(setBaseCurrency(country))} />
+                        <div className={style.input_container} >
+                            <Tooltip
+                                open={tooltipVisible}
+                                title="!!! Please enter a valid number."
+                                placement="bottom"
+                                color='red'
+                            >
+                                <Input
+                                    type="text"
+                                    value={amount}
+                                    onChange={handleChange}
+                                    placeholder="Enter amount"
+                                    suffix={passBaseCurrency.currency}
+                                />
+                            </Tooltip>
+                        </div>
+                    </div>
+                    <div className={style.mid_container} >
+                        <span onClick={() => {
+                            dispatch(setChangeCurrency())
+                        }} ><IoSwapHorizontalOutline /></span>
+                    </div>
+                    <div className={style.resoult_container} >
+                        <Currency
+                            counties={passTargetCurrency}
+                            handleCurrencyChange={(country) => dispatch(setTargetCurrency(country))} />
+                        <div>{calculateExchange()}</div>
                     </div>
                 </div>
-                <div className={style.mid_container} >
-                    <span onClick={() => {
-                        dispatch(setChangeCurrency())
-                    }} ><IoSwapHorizontalOutline /></span>
-                </div>
-                <div className={style.resoult_container} >
-                    <Currency
-                        counties={passTargetCurrency}
-                        handleCurrencyChange={(country) => dispatch(setTargetCurrency(country))} />
-                    <div>{calculateExchange()}</div>
-                </div>
-                <div className={style.result_container} ></div>
+                <div className={style.btn_container} onClick={() => {
+                    store()
+                    getResult()}} > <Button>ExChange</Button></div>
             </div>
         </div>
     )
