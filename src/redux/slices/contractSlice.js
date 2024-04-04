@@ -22,10 +22,14 @@ const contractSlice = createSlice({
       state.contracts.push(action.payload);
       saveContractsToStorage(state.contracts);
     },
+    removeContract(state, action) {
+      state.contracts = state.contracts.filter(contract => contract.id !== action.payload.id);
+      saveContractsToStorage(state.contracts);
+    },
   },
 });
 
-export const { addContract } = contractSlice.actions;
+export const { addContract, removeContract } = contractSlice.actions;
 
 export default contractSlice.reducer;
 
