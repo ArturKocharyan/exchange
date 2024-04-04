@@ -7,6 +7,7 @@ import useExchangeRate from '../../hooks/useExchangeRate';
 import { IoSwapHorizontalOutline } from 'react-icons/io5';
 import { setChangeCurrency, setBaseCurrency, setTargetCurrency } from '../../redux/slices/currencySlice';
 import { addContract } from '../../redux/slices/contractSlice';
+import { invalidValues } from '../../asets/handdleError/stringHandle';
 
 function Exchange() {
     const dispatch = useDispatch();
@@ -16,11 +17,12 @@ function Exchange() {
     const exchangeRate = useExchangeRate(passBaseCurrency.currency, passTargetCurrency.currency);
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [changeResult, setChangeResult] = useState(0);
-    const invalidValues = ['00', '01', '02', '03', "04", "05", '06', '07', '08', '09'];
+    const getInvalidValues = invalidValues
+
 
     const handleChange = e => {
         const newValue = e.target.value;
-        if (isNaN(newValue) || newValue === ' ' || invalidValues.includes(newValue)) {
+        if (isNaN(newValue) || newValue === ' ' || getInvalidValues.includes(newValue) || newValue !== newValue.trim()) {
             setTooltipVisible(true);
             setTimeout(() => {
                 setTooltipVisible(false);

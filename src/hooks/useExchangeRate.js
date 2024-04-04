@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const useExchangeRate = (baseCurrency, targetCurrency) => {
   const [exchangeRate, setExchangeRate] = useState(null);
-  const API_KEY = 'e0172bb182016af40084c6c3';
+  const API_KEY = '133a5594b4e9b356dadf29db';
 
   useEffect(() => {
     fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${baseCurrency}`)

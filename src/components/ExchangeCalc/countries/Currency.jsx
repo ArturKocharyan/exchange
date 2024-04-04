@@ -11,6 +11,7 @@ function Currency({ counties, handleCurrencyChange }) {
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
     const passBaseCurrency = useSelector((state) => state.currency.baseCurrency)
+    const passTargetCurrency = useSelector((state) => state.currency.targetCurrency)
 
     const error = () => {
         messageApi.open({
@@ -32,7 +33,7 @@ function Currency({ counties, handleCurrencyChange }) {
     };
 
     const sameCurrency = (country) => {
-        if (passBaseCurrency.name === country.name) {
+        if (passBaseCurrency.name === country.name || passTargetCurrency.name === country.name) {
             error()
         } else {
             handleCurrencyChange(country)
@@ -42,6 +43,7 @@ function Currency({ counties, handleCurrencyChange }) {
 
     const handleVisibleChange = (visibility) => {
         setVisible(visibility);
+        setSearchQuery('')
     };
 
     const filteredCountries = countryCurrencies.filter((country) =>
@@ -65,6 +67,7 @@ function Currency({ counties, handleCurrencyChange }) {
                         >
                             <Input
                                 placeholder="Search by country name"
+                                value={searchQuery}
                                 onChange={(e) => handleSearchQueryChange(e.target.value)}
                             />
                         </Tooltip>
