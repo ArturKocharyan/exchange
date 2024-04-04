@@ -16,10 +16,11 @@ function Exchange() {
     const exchangeRate = useExchangeRate(passBaseCurrency.currency, passTargetCurrency.currency);
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [changeResult, setChangeResult] = useState(0);
-
+    const invalidValues = ['00', '01', '02', '03', "04", "05", '06', '07', '08', '09'];
+    
     const handleChange = e => {
         const newValue = e.target.value;
-        if (isNaN(newValue) || newValue === ' ' || newValue === '00') {
+        if (isNaN(newValue) || newValue === ' ' || invalidValues.includes(newValue)) {
             setTooltipVisible(true);
             setTimeout(() => {
                 setTooltipVisible(false);

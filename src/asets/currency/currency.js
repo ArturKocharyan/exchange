@@ -53,7 +53,6 @@ const countryCurrencies = [
     { name: "Grenada", currency: "XCD", flag: "http://flags.fmcdn.net/data/flags/mini/gd.png" },
     { name: "Guatemala", currency: "GTQ", flag: "http://flags.fmcdn.net/data/flags/mini/gt.png" },
     { name: "Guinea", currency: "GNF", flag: "http://flags.fmcdn.net/data/flags/mini/gn.png" },
-    { name: "Guinea-Bissau", currency: "CFA", flag: "ttp://flags.fmcdn.net/data/flags/mini/gw.png" },
     { name: "Guyana", currency: "GYD", flag: "http://flags.fmcdn.net/data/flags/mini/gy.png" },
     { name: "Haiti", currency: "HTG", flag: "http://flags.fmcdn.net/data/flags/mini/ht.png" },
     { name: "Honduras", currency: "HNL", flag: "http://flags.fmcdn.net/data/flags/mini/hn.png" },

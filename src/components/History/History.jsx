@@ -8,8 +8,6 @@ function History() {
     const contracts = useSelector(state => state.contract.contracts);
     const dispatch = useDispatch()
 
-    console.log(contracts)
-
     return (
         <div className={style.main_container} >
             <div className={style.history_container}>
