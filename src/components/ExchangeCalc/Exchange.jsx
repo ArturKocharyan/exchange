@@ -17,7 +17,7 @@ function Exchange() {
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [changeResult, setChangeResult] = useState(0);
     const invalidValues = ['00', '01', '02', '03', "04", "05", '06', '07', '08', '09'];
-    
+
     const handleChange = e => {
         const newValue = e.target.value;
         if (isNaN(newValue) || newValue === ' ' || invalidValues.includes(newValue)) {
@@ -93,7 +93,7 @@ function Exchange() {
                         <div>{calculateExchange()}</div>
                     </div>
                 </div>
-                <div className={style.btn_container} onClick={getResult}><Button>Exchange</Button></div>
+                <div className={style.btn_container} ><Button onClick={getResult}>Exchange</Button></div>
             </div>
         </div>
     );
