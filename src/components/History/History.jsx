@@ -11,6 +11,7 @@ function History() {
     return (
         <div className={style.main_container} >
             <div className={style.history_container}>
+                <p>Contracts History</p>
                 {
                     contracts?.map((item) => {
                         return (

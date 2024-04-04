@@ -10,7 +10,7 @@ import { addContract } from '../../redux/slices/contractSlice';
 
 function Exchange() {
     const dispatch = useDispatch();
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState();
     const passBaseCurrency = useSelector(state => state.currency.baseCurrency);
     const passTargetCurrency = useSelector(state => state.currency.targetCurrency);
     const exchangeRate = useExchangeRate(passBaseCurrency.currency, passTargetCurrency.currency);

@@ -16,6 +16,10 @@
     margin-right: 5px;
 }
 
+.history_container p {
+    text-align: center;
+}
+
 .item {
     display: flex;
     flex-direction: column;

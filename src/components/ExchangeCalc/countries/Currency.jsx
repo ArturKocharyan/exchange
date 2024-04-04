@@ -87,7 +87,7 @@ function Currency({ counties, handleCurrencyChange }) {
                 }
                 trigger="click"
                 open={visible}
-                onVisibleChange={handleVisibleChange}
+                onOpenChange={handleVisibleChange}
                 onClick={() => setVisible(true)}
             >
                 <span className={style.header_text} >Select Base Currency</span>
